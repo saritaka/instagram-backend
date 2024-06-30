@@ -4,8 +4,8 @@ import { asyncLocalStorage } from "../services/als.service.js";
 import { authService } from "../api/auth/auth.service.js";
 
 export function requireAuth(req, res, next) {
-  // const { loggedinUser } = asyncLocalStorage.getStore();
-  const loggedinUser = authService.validateToken(req.cookies.loginToken);
+  const { loggedinUser } = asyncLocalStorage.getStore();
+  // const loggedinUser = authService.validateToken(req.cookies.loginToken);
 
   req.loggedinUser = loggedinUser;
   logger.info("required authintication - the logged in user: ", loggedinUser);

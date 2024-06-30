@@ -69,17 +69,18 @@ async function add(story) {
 async function update(story) {
   try {
     const storyToSave = {
-      vendor: story.vendor,
-      price: story.price,
+      txt: story.txt,
     };
+    logger.debug("story to update", storyToSave);
     const collection = await dbService.getCollection("story");
     await collection.updateOne(
       { _id: ObjectId(story._id) },
       { $set: storyToSave }
     );
+    logger.debug("story to update", story);
     return story;
   } catch (err) {
-    logger.error(`cannot update story ${storyId}`, err);
+    logger.error(`cannot update story ${story._id}`, err);
     throw err;
   }
 }

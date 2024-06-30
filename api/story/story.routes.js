@@ -19,6 +19,7 @@ const router = express.Router();
 router.get("/", log, getStorys);
 router.get("/:id", getStoryById);
 router.post("/", requireAuth, addStory);
+// router.post("/", addStory);
 router.put("/:id", requireAuth, updateStory);
 router.delete("/:id", requireAuth, removeStory);
 // router.delete('/:id', requireAuth, requireAdmin, removeStory)

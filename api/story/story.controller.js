@@ -53,6 +53,7 @@ export async function addStory(req, res) {
 
 export async function updateStory(req, res) {
   try {
+    logger.debug("updatestory", req.body);
     const story = req.body;
     const updatedStory = await storyService.update(story);
     res.json(updatedStory);
