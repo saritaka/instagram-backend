@@ -13,19 +13,22 @@ export const userService = {
   getByUsername, // Used for Login
 };
 
-async function query(filterBy = {}) {
+async function query(filterBy = { txt: "" }) {
   const criteria = _buildCriteria(filterBy);
   try {
     const collection = await dbService.getCollection("user");
     var users = await collection.find(criteria).toArray();
+    // var users = await collection.find(criteria);
+    logger.debug("query - filter by txt", users);
     users = users.map((user) => {
       delete user.password;
-      user.createdAt = ObjectId(user._id).getTimestamp();
+      // user.createdAt = ObjectId(user._id).getTimestamp();
       // Returning fake fresh data
       // user.createdAt = Date.now() - (1000 * 60 * 60 * 24 * 3) // 3 days ago
       return user;
     });
     return users;
+    // return Object.assign({}, users);
   } catch (err) {
     logger.error("cannot find users", err);
     throw err;
@@ -99,6 +102,9 @@ async function add(user) {
       password: user.password,
       fullname: user.fullname,
       imgUrl: user.imgUrl,
+      following: user.following,
+      followers: user.followers,
+      savedStoryIds: user.savedStoryIds,
       // score: 100
     };
     const collection = await dbService.getCollection("user");

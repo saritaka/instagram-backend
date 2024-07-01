@@ -35,7 +35,7 @@ async function getById(storyId) {
   try {
     const collection = await dbService.getCollection("story");
     const story = await collection.findOne({ _id: ObjectId(storyId) });
-    story.createdAt = ObjectId(story._id).getTimestamp();
+    // story.createdAt = ObjectId(story._id).getTimestamp();
 
     return story;
   } catch (err) {
