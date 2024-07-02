@@ -33,7 +33,7 @@ import { userRoutes } from "./api/user/user.routes.js";
 import { storyRoutes } from "./api/story/story.routes.js";
 import { setupSocketAPI } from "./services/socket.service.js";
 import { config } from "./config/index.js";
-console.log("config:", config);
+// console.log("config:", config);
 // routes
 import { setupAsyncLocalStorage } from "./middlewares/setupAls.middleware.js";
 app.all("*", setupAsyncLocalStorage);
