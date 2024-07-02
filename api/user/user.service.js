@@ -81,13 +81,22 @@ async function update(user) {
   try {
     // peek only updatable properties
     const userToSave = {
-      _id: ObjectId(user._id), // needed for the returnd obj
+      // _id: ObjectId(user._id), // needed for the returnd obj
       fullname: user.fullname,
+      savedStoryIds: user.savedStoryIds,
+      followers: user.followers,
+      following: user.following,
+      username: user.username,
       // score: user.score,
     };
+    logger.debug("user to save:", userToSave);
     const collection = await dbService.getCollection("user");
-    await collection.updateOne({ _id: userToSave._id }, { $set: userToSave });
-    return userToSave;
+    // await collection.updateOne({ _id: userToSave._id }, { $set: userToSave });
+    await collection.updateOne(
+      { _id: ObjectId(user._id) },
+      { $set: userToSave }
+    );
+    return user;
   } catch (err) {
     logger.error(`cannot update user ${user._id}`, err);
     throw err;

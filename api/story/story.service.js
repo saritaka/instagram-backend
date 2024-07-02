@@ -70,6 +70,9 @@ async function update(story) {
   try {
     const storyToSave = {
       txt: story.txt,
+      likedBy: story.likedBy,
+      savedStoryIds: story.savedStoryIds,
+      comments: story.comments,
     };
     logger.debug("story to update", storyToSave);
     const collection = await dbService.getCollection("story");
@@ -77,7 +80,7 @@ async function update(story) {
       { _id: ObjectId(story._id) },
       { $set: storyToSave }
     );
-    logger.debug("story to update", story);
+    // logger.debug("story to update", story);
     return story;
   } catch (err) {
     logger.error(`cannot update story ${story._id}`, err);

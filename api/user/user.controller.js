@@ -39,6 +39,7 @@ export async function deleteUser(req, res) {
 export async function updateUser(req, res) {
   try {
     const user = req.body;
+    logger.debug("request sent for user update:", user);
     const savedUser = await userService.update(user);
     res.send(savedUser);
   } catch (err) {
